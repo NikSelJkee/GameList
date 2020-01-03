@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameListApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Game List" Height="450" Width="800" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.20*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <Button x:Name="AddGameButton" Content="Добавить игру" Margin="5,25,5,0" Click="AddGameButton_Click"/>
+            <Button x:Name="DeleteGameButton" Content="Удалить игру" Margin="5,25,5,0" Click="DeleteGameButton_Click"/>
+            <Button x:Name="ListOfCompaniesButton" Content="Список компаний" Margin="5,25,5,0" Click="ListOfCompanies_Click"/>
+        </StackPanel>
+        <DataGrid x:Name="ListOfGames" Grid.Column="1">
+            
+        </DataGrid>
     </Grid>
 </Window>

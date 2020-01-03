@@ -20,9 +20,37 @@ namespace GameListApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        GameContext db;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            db = new GameContext();
+
+            ListOfGames.DataContext = db.Games.ToList();
+        }
+
+        private void AddGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow gameWindow = new GameWindow();
+
+            if (gameWindow.ShowDialog() == true)
+            {
+
+            }
+        }
+
+        private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListOfCompanies_Click(object sender, RoutedEventArgs e)
+        {
+            CompanyWindow companyWindow = new CompanyWindow();
+
+            companyWindow.ShowDialog();
         }
     }
 }
