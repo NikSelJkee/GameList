@@ -19,18 +19,43 @@ namespace GameListApp
     /// </summary>
     public partial class GameWindow : Window
     {
+        GameContext db;
+
         public GameWindow()
         {
             InitializeComponent();
+
+            db = new GameContext();
+
+            var companies = db.Companies.Select(p => p.Name).ToList();
+            Company.ItemsSource = companies;
         }
 
         private void AcceptGameButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            try
+            {
+                Game game = new Game();
+                game.Title = Title.Text;
+                game.Price = int.Parse(Price.Text);
+                game.Company = db.Companies.SingleOrDefault(c => c.Name == Company.SelectedItem.ToString());
+
+                db.Games.Add(game);
+                db.SaveChanges();
+                db.Dispose();
+
+                DialogResult = true;
+            }
+            catch
+            {
+                MessageBox.Show("Проверьте корректность ввода данных");
+            }
         }
 
         private void CancelGameButton_Click(object sender, RoutedEventArgs e)
         {
+            db.Dispose();
+
             DialogResult = false;
         }
     }

@@ -29,7 +29,6 @@ namespace GameListApp
             db = new GameContext();
 
             UpdateListOfCompanies(db);
-
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -66,17 +65,30 @@ namespace GameListApp
         }
 
         private void ListOfCompanies_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Name.IsEnabled = true;
-            DateOfFoundation.IsEnabled = true;
-            Information.IsEnabled = true;
-
+        {           
             var item = (string)ListOfCompanies.SelectedItem;
             selectedCompany = db.Companies.FirstOrDefault(c => c.Name == item);
 
-            Name.Text = selectedCompany.Name;
-            DateOfFoundation.Text = selectedCompany.DateOfFoundation;
-            Information.Text = selectedCompany.Information;
+            if (selectedCompany != null)
+            {
+                Name.IsEnabled = true;
+                DateOfFoundation.IsEnabled = true;
+                Information.IsEnabled = true;
+
+                Name.Text = selectedCompany.Name;
+                DateOfFoundation.Text = selectedCompany.DateOfFoundation;
+                Information.Text = selectedCompany.Information;
+            }
+            else
+            {
+                Name.Text = string.Empty;
+                DateOfFoundation.Text = string.Empty;
+                Information.Text = string.Empty;
+
+                Name.IsEnabled = false;
+                DateOfFoundation.IsEnabled = false;
+                Information.IsEnabled = false;
+            }
         }
 
         private void UpdateListOfCompanies(GameContext db)
@@ -88,17 +100,20 @@ namespace GameListApp
 
         private void Name_TextChanged(object sender, TextChangedEventArgs e)
         {
-            selectedCompany.Name = Name.Text;
+            if (selectedCompany != null)
+                selectedCompany.Name = Name.Text;
         }
 
         private void DateOfFoundation_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedCompany.DateOfFoundation = DateOfFoundation.Text;
+            if (selectedCompany != null)
+                selectedCompany.DateOfFoundation = DateOfFoundation.Text;
         }
 
         private void Information_TextChanged(object sender, TextChangedEventArgs e)
         {
-            selectedCompany.Information = Information.Text;
+            if (selectedCompany != null)
+                selectedCompany.Information = Information.Text;
         }
     }
 }

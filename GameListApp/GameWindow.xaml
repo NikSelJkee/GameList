@@ -17,7 +17,7 @@
         <Label Grid.Row="1" Content="Цена" VerticalAlignment="Center" FontSize="22"/>
         <TextBox x:Name="Price" Grid.Row="1" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Center" Margin="70,10,10,0" Height="25"/>
         <Label Grid.Row="2" Content="Название компании" VerticalAlignment="Center" FontSize="22"/>
-        <ListBox x:Name="Company" Grid.Row="2" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="220,10,10,0" Height="25"/>
+        <ComboBox x:Name="Company" Grid.Row="2" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="220,10,10,0" Height="25"/>
         <Button x:Name="AcceptGameButton" Grid.Row="3" Content="Принять" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22" Height="50" Width="150" Margin="10,0,0,0" Click="AcceptGameButton_Click"/>
         <Button x:Name="CancelGameButton" Grid.Row="3" Content="Отмена" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="22" Height="50" Width="150" Margin="0,0,10,0" Click="CancelGameButton_Click"/>
     </Grid>

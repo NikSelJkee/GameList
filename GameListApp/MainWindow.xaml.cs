@@ -28,7 +28,7 @@ namespace GameListApp
 
             db = new GameContext();
 
-            ListOfGames.DataContext = db.Games.ToList();
+            UpdateListOfGames();
         }
 
         private void AddGameButton_Click(object sender, RoutedEventArgs e)
@@ -37,7 +37,7 @@ namespace GameListApp
 
             if (gameWindow.ShowDialog() == true)
             {
-
+                UpdateListOfGames();
             }
         }
 
@@ -51,6 +51,15 @@ namespace GameListApp
             CompanyWindow companyWindow = new CompanyWindow();
 
             companyWindow.ShowDialog();
+        }
+
+        private void UpdateListOfGames()
+        {
+            ListOfGames.ItemsSource = db.Games.Select(g => new
+            { Id = g.Id,
+                Title = g.Title,
+                Price = g.Price,
+                Company = g.Company.Name }).ToList();
         }
     }
 }
