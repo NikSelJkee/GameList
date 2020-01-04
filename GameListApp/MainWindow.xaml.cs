@@ -43,7 +43,16 @@ namespace GameListApp
 
         private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ListOfGames.SelectedItem != null)
+            {
+                int? id = ListOfGames.SelectedItem.GetType().GetProperty("Id").GetValue(ListOfGames.SelectedItem, null) as int?;
 
+                Game game = db.Games.SingleOrDefault(g => g.Id == id);
+                db.Games.Remove(game);
+                db.SaveChanges();
+
+                UpdateListOfGames();
+            }
         }
 
         private void ListOfCompanies_Click(object sender, RoutedEventArgs e)
@@ -51,6 +60,23 @@ namespace GameListApp
             CompanyWindow companyWindow = new CompanyWindow();
 
             companyWindow.ShowDialog();
+        }
+
+        private void ListOfGames_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            GameWindow gameWindow = new GameWindow();
+            string title = ListOfGames.SelectedItem.GetType().GetProperty("Title").GetValue(ListOfGames.SelectedItem, null) as string;
+            int? price = ListOfGames.SelectedItem.GetType().GetProperty("Price").GetValue(ListOfGames.SelectedItem, null) as int?;
+            string company = ListOfGames.SelectedItem.GetType().GetProperty("Company").GetValue(ListOfGames.SelectedItem, null) as string;
+
+            gameWindow.Title.Text = title;
+            gameWindow.Price.Text = price.ToString();
+            gameWindow.Company.SelectedItem = company;
+
+            if (gameWindow.ShowDialog() == true)
+            {
+                UpdateListOfGames();
+            }
         }
 
         private void UpdateListOfGames()

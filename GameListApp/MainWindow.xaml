@@ -16,7 +16,7 @@
             <Button x:Name="DeleteGameButton" Content="Удалить игру" Margin="5,25,5,0" Click="DeleteGameButton_Click"/>
             <Button x:Name="ListOfCompaniesButton" Content="Список компаний" Margin="5,25,5,0" Click="ListOfCompanies_Click"/>
         </StackPanel>
-        <DataGrid x:Name="ListOfGames" Grid.Column="1">
+        <DataGrid x:Name="ListOfGames" Grid.Column="1" MouseDoubleClick="ListOfGames_MouseDoubleClick">
             
         </DataGrid>
     </Grid>
